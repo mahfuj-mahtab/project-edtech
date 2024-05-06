@@ -2,6 +2,8 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
 
 # Create your views here.
 from django.contrib.auth.models import User
@@ -17,8 +19,6 @@ class UserViewset(viewsets.ModelViewSet):
     # def superusers(self,request):
     #     queryset = User.objects.filter(is_superuser = True)
 
-from django.contrib.auth import authenticate, login
-from django.http import JsonResponse
 @csrf_exempt
 def login_view(request):
     if request.method == 'POST':

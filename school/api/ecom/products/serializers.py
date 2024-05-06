@@ -13,3 +13,11 @@ class BrandSerializers(serializers.ModelSerializer):
     class Meta:
         model = Brand
         fields = '__all__'
+class OrderSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = ProductOrder
+        fields = '__all__'
+
+
+
+

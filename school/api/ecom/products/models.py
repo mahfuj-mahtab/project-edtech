@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 from django.db import models
-
+from django.contrib.auth.models import User
 class Category(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
@@ -37,3 +37,34 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+class ProductOrder(models.Model):
+    status = (
+        ('PENDING', 'PENDING'),
+        ('HOLD', 'HOLD'),
+        ('DELIVERED', 'DELIVERED'),
+        ('IN-DELIVERY', 'IN-DELIVERY'),
+        ('CANCLED', 'CANCLED'),
+    )
+    payment = (
+        ('BKASH', 'BKASH'),
+        ('NAGAD', 'NAGAD'),
+        ('ROCKET', 'ROCKET'),
+        ('SSL-COMMERZ', 'SSL-COMMERZ'),
+        ('CASH-ON-DELIVERY', 'CASH-ON-DELIVERY'),
+      
+    )
+    name = models.CharField(max_length=200)
+    address = models.CharField(max_length=300)
+    phone = models.CharField(max_length=300)
+    payment_method = models.CharField(choices=payment,max_length=300)
+    products = models.ForeignKey(Product, on_delete=models.CASCADE)
+    transaction_id = models.CharField(max_length=100, default='0')  # Field to store transaction ID
+    quantity = models.PositiveIntegerField(default=1)
+    total_amount = models.CharField(max_length=50,default=0)
+    order_status = models.CharField(choices=status,default='PENDING',max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Order {self.phone} - {self.name}"
+
