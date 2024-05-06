@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'api.ecom',
-    'api.ecom.products'
+    'api.ecom.products',
+    'api.user',
 ]
 
 MIDDLEWARE = [

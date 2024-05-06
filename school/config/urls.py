@@ -18,14 +18,14 @@ from django.contrib import admin
 from django.urls import include, path
 from api.ecom.views import *
 from rest_framework.routers import DefaultRouter
-from api.ecom.products.views import *
 
-router = DefaultRouter()
-router.register(r'products',ProductViewSet)
-router.register(r'category',CategoryViewSet)
-router.register(r'brand',BrandViewSet)
+# from api import ecom
+# from api.ecom.products.views import *
+# import api
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     # path("api/", ecomhome, name = 'ecom home'),
-    path("",include(router.urls)),
+    path("api/ecom/",include("api.ecom.urls")),
+    path("api/user/",include("api.user.urls")),
 ]
